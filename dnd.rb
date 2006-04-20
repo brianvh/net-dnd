@@ -131,7 +131,8 @@ module Net
 
     def do_start
       raise IOError, 'DND session already started' if @started
-      @socket = InternetMessageIO.open(@host, @port, @open_timeout,
+      # Changed for Ruby 1.8.4... 20-Apr-06. BVH.
+      @socket = InternetMessageIO.old_open(@host, @port, @open_timeout,
                                        @read_timeout, @debug_output)
       check_response(critical { recv_response() }) # check the server response
       begin
