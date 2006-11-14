@@ -177,7 +177,7 @@ module Net
     #
     def lookup( user )
       users = []
-      user_count, field_count = get_response_count( 'LOOKUP "%s",%s',
+      user_count, field_count = get_response_count( 'LOOKUP %s,%s',
                                                     user_spec(user),
                                                     @fields.join(" "))
       user_count.times do |u|
@@ -201,7 +201,7 @@ module Net
     # # Net::DNDUserNameTooShort
     #
     def lookup_one( user )
-      user_count, field_count = get_response_count( 'LOOKUP "%s",%s',
+      user_count, field_count = get_response_count( 'LOOKUP %s,%s',
                                                     user_spec(user),
                                                     @fields.join(" "))
       return nil unless user_count == 1
@@ -226,7 +226,7 @@ module Net
       return "##{user}" if /^\d+$/.match(user)
       return "#*#{user}" if /^z\d+$/.match(user.downcase) # added for 0.2
       return "#*#{user}" if /^\d+[a-z]\d*$/.match(user.downcase)
-      user
+      user.gsub(/,/, '')
     end
 
     # Private method, called by start, that populates the @fields array. Since only
