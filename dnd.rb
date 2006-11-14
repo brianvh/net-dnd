@@ -177,7 +177,7 @@ module Net
     #
     def lookup( user )
       users = []
-      user_count, field_count = get_response_count( 'LOOKUP %s,%s',
+      user_count, field_count = get_response_count( 'LOOKUP "%s",%s',
                                                     user_spec(user),
                                                     @fields.join(" "))
       user_count.times do |u|
@@ -201,7 +201,7 @@ module Net
     # # Net::DNDUserNameTooShort
     #
     def lookup_one( user )
-      user_count, field_count = get_response_count( 'LOOKUP %s,%s',
+      user_count, field_count = get_response_count( 'LOOKUP "%s",%s',
                                                     user_spec(user),
                                                     @fields.join(" "))
       return nil unless user_count == 1
