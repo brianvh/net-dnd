@@ -1,8 +1,4 @@
 
-# Make sure HOME is set, regardless of OS, so that File.expand_path works
-# as expected with tilde characters.
-ENV['HOME'] ||= ENV['HOMEPATH'] ? "#{ENV['HOMEDRIVE']}#{ENV['HOMEPATH']}" : "."
-
 require "#{File.dirname(__FILE__)}/dnd/session"
 
 module Net
@@ -19,7 +15,7 @@ module Net
   # session/connection management. The intent is to call this method with a block construct,
   # like this:
   #
-  #   Net::DND.start("your.dnd.server", field_list) do |dnd|
+  #   Net::DND.start("your.dnd.server", fields) do |dnd|
   #     profile = dnd.lookup("some user")
   #   end
   #
