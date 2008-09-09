@@ -3,8 +3,16 @@ Manifest.txt
 README.txt
 Rakefile
 bin/net-dnd
-lib/net-dnd.rb
-spec/net-dnd_spec.rb
+lib/net/dnd.rb
+lib/net/dnd/field.rb
+lib/net/dnd/profile.rb
+lib/net/dnd/session.rb
+lib/net/dnd/sync_io.rb
+lib/net/dnd/user_spec.rb
+lib/net/dnd/version.rb
+spec/dnd/field_spec.rb
+spec/dnd/user_spec_spec.rb
+spec/spec.opts
 spec/spec_helper.rb
 tasks/ann.rake
 tasks/bones.rake
@@ -19,4 +27,3 @@ tasks/setup.rb
 tasks/spec.rake
 tasks/svn.rake
 tasks/test.rake
-test/test_net-dnd.rb
