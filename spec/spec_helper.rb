@@ -1,4 +1,5 @@
 $LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+require 'rubygems'
 require 'spec'
 
 Spec::Runner.configure do |config|
@@ -8,6 +9,6 @@ Spec::Runner.configure do |config|
   # use mocha, flexmock or RR, uncomment the appropriate line:
   #
   # config.mock_with :mocha
-  config.mock_with :flexmock
+  # config.mock_with :flexmock
   # config.mock_with :rr
 end
