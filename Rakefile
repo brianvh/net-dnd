@@ -5,7 +5,7 @@
 load 'tasks/setup.rb'
 
 ensure_in_path 'lib'
-require 'net-dnd'
+require 'net/dnd'
 
 task :default => 'spec:run'
 

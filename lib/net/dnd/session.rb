@@ -5,8 +5,8 @@ folder_path = File.dirname(__FILE__)
 
 require "#{folder_path}/profile"
 require "#{folder_path}/user_spec"
+require "#{folder_path}/field"
 require "#{folder_path}/sync_io"
-
 
 module Net ; module DND
   

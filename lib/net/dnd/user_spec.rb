@@ -1,8 +1,20 @@
 
 module Net ; module DND
   
+  # This is a container class for the User Specifier portion of the DND protocol lookup command.
+  # Something like this isn't expressly needed, but because there are 3 types of specifier,
+  # based around 4 different patterns of specifier, which leads to three slightly different
+  # types of output, it seemed like a class was the best way to handle those determinations.
+  #
+  # Once a string specifier is passed into the constructer method, it's stored and then
+  # matched against one of several patterns to determine it's type. This type is then used
+  # to choose the output format of the specifier, when the instantiated class object is
+  # coerced back to a string.
+  
   class UserSpec
-
+    
+    attr_reader :type
+    
     def initialize(specifier)
       @spec = specifier.to_s
       @type = case @spec.downcase
