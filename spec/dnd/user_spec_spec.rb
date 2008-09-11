@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'net/dnd/user_spec'
+require 'net/dnd/protocol/user_spec'
 
-module Net ; module DND
+module Net ; module DND ; module Protocol
   
   describe UserSpec do
     
@@ -66,4 +66,4 @@ module Net ; module DND
     end
   end
   
-end ; end
+end ; end ; end

@@ -1,5 +1,5 @@
 
-module Net ; module DND
+module Net ; module DND; module Protocol
   
   # The Field class is another wrapper class for the lookup command. Unless you are simply
   # performing a lookup to verify that there's at least one name match, you will be passing
@@ -19,7 +19,7 @@ module Net ; module DND
     VALID_ACCESS_OPTIONS = ['A', 'U', 'N', 'T']
     
     def initialize(name, writeable, readable)
-      @name = name
+      @name = name.to_s
       store_access_value(:writeable, writeable)
       store_access_value(:readable, readable)
     end
@@ -38,6 +38,10 @@ module Net ; module DND
       @name
     end
     
+    def to_sym
+      @name.to_sym
+    end
+    
     def read_all?
       @readable == 'A'
     end
@@ -51,5 +55,5 @@ module Net ; module DND
     
   end
   
-end ; end
+end ; end ; end
 
