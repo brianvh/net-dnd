@@ -7,7 +7,7 @@ require "#{folder_path}/field"
 
 module Net ; module DND ; module Protocol
 
-  class Session
+  class Connection
 
     PORT = 902
 

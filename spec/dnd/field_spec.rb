@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-require 'net/dnd/protocol/field'
+require 'net/dnd/field'
 
 module Net ; module DND
   

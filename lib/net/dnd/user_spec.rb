@@ -1,5 +1,5 @@
 
-module Net ; module DND ; module Protocol
+module Net ; module DND
   
   # This is a container class for the User Specifier portion of the DND protocol lookup command.
   # Something like this isn't expressly needed, but because there are 3 types of specifier,
@@ -46,4 +46,4 @@ module Net ; module DND ; module Protocol
     
   end
   
-end ; end ; end
+end ; end

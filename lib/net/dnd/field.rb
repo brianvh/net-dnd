@@ -1,5 +1,5 @@
 
-module Net ; module DND; module Protocol
+module Net ; module DND
   
   # The Field class is another wrapper class for the lookup command. Unless you are simply
   # performing a lookup to verify that there's at least one name match, you will be passing
@@ -55,5 +55,5 @@ module Net ; module DND; module Protocol
     
   end
   
-end ; end ; end
+end ; end
 
