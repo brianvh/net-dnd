@@ -2,6 +2,7 @@ folder_path = File.dirname(__FILE__)
 
 require "#{folder_path}/connection"
 require "#{folder_path}/profile"
+require "#{folder_path}/field"
 
 module Net ; module DND
   
@@ -20,10 +21,21 @@ module Net ; module DND
       set_fields(field_list)
     end
     
+    def open?
+      connection.open?
+    end
+    
     def set_fields(field_list=[])
       response = request(:fields, field_list)
       @fields = []
-      response.items.each { |item| @fields << item.to_sym }
+      response.items.each do |item|
+        field = Field.from_field_line(item)
+        if field.red_all? # only world readable fields are valid for DND Profiles
+          @fields << field.to_sym
+        else
+          raise "#{field.to_s} is not world readable." unless @fields.empty?
+        end
+      end
     end
     
     def find(look_for, one=nil)
@@ -43,7 +55,7 @@ module Net ; module DND
     private
     
       def request(type, *args)
-        raise "Connection closed." if connection.closed?
+        raise "Connection closed." unless connection.open?
         response = connection.send(type, *args)
         raise response.error unless response.ok?
         response
