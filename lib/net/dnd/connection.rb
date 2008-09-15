@@ -13,6 +13,8 @@ module Net ; module DND
 
     attr_reader :host, :socket, :error, :response
 
+    attr_reader :command
+
     def initialize(hostname)
       @host = hostname
       @open = false
@@ -53,6 +55,7 @@ module Net ; module DND
     private
 
     def read_response(cmd="noop")
+      @command = cmd
       socket.puts(cmd)
       @response = Response.new(socket)
     end
