@@ -1,4 +1,7 @@
 
+folder_path = File.dirname(__FILE__)
+require "#{folder_path}/errors"
+
 module Net ; module DND
   
   # The Field class is another wrapper class for the lookup command. Unless you are simply
@@ -16,8 +19,6 @@ module Net ; module DND
     
     attr_reader :name, :writeable, :readable
     
-    VALID_ACCESS_OPTIONS = ['A', 'U', 'N', 'T']
-    
     def initialize(name, writeable, readable)
       @name = name.to_s
       store_access_value(:writeable, writeable)
@@ -26,7 +27,7 @@ module Net ; module DND
     
     def self.from_field_line(line)
       args = line.split
-      raise "Invalid Field Line" unless args.length == 3
+      raise FieldLineInvalid unless args.length == 3
       new(args[0], args[1], args[2])
     end
     
@@ -49,7 +50,6 @@ module Net ; module DND
     private
     
     def store_access_value(read_write, value)
-      raise "Invalid Access Value" unless VALID_ACCESS_OPTIONS.include?(value)
       instance_variable_set("@#{read_write}".to_sym, value)
     end
     

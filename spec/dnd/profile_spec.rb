@@ -35,8 +35,8 @@ module Net ; module DND
       @profile.should_not be_did
     end
 
-    it "should raise an error if did field is requested" do
-      lambda { @profile.did }.should raise_error(RuntimeError)
+    it "should raise Field Not Found error if did field is requested" do
+      lambda { @profile.did }.should raise_error(FieldNotFound)
     end
 
   end

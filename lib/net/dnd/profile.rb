@@ -1,4 +1,7 @@
 
+folder_path = File.dirname(__FILE__)
+require "#{folder_path}/errors"
+
 module Net ; module DND
 
   class Profile
@@ -31,7 +34,7 @@ module Net ; module DND
     def return_field(field)
       field = field.to_sym
       return @attributes[field] if @attributes.has_key?(field)
-      raise "Field #{field} does not exist in this Profile"
+      raise FieldNotFound, "Field #{field} does not found in this Profile"
     end
 
   end

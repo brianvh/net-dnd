@@ -12,8 +12,8 @@ module Net ; module DND
       flexmock(Connection).should_receive(:new).once.and_return(@connection)
     end
 
-    it "should raise an error" do
-      lambda { Session.new('my.badhost.com') }.should raise_error("Could not connect to DND server")
+    it "should raise a Connection Error" do
+      lambda { Session.new('my.badhost.com') }.should raise_error(ConnectionError)
     end
   end
 
@@ -75,9 +75,9 @@ module Net ; module DND
       flexmock(Field).should_receive(:from_field_line).once.and_return(@ssn_field)
     end
 
-    it "should raise an error on the bad field" do
+    it "should raise a Field Access Denined error" do
       lambda { @session.set_fields(@field_list) }.
-        should raise_error(RuntimeError, "#{@field_list[0]} is not world readable.")
+        should raise_error(FieldAccessDenied, "#{@field_list[0]} is not world readable.")
     end
   end
 

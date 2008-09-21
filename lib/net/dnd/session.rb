@@ -3,6 +3,7 @@ folder_path = File.dirname(__FILE__)
 require "#{folder_path}/connection"
 require "#{folder_path}/profile"
 require "#{folder_path}/field"
+require "#{folder_path}/errors"
 
 module Net ; module DND
   
@@ -17,7 +18,7 @@ module Net ; module DND
     
     def initialize(host)
       @connection = Connection.new(host)
-      raise connection.error unless connection.open?
+      raise ConnectionError, connection.error unless connection.open?
     end
 
     def self.start(host, field_list=[])
@@ -38,7 +39,7 @@ module Net ; module DND
         if field.read_all? # only world readable fields are valid for DND Profiles
           @fields << field.to_sym
         else
-          raise "#{field.to_s} is not world readable." unless field_list.empty?
+          raise FieldAccessDenied, "#{field.to_s} is not world readable." unless field_list.empty?
         end
       end
     end
@@ -60,9 +61,9 @@ module Net ; module DND
     private
     
     def request(type, *args)
-      raise "Connection closed." unless open?
+      raise ConnectionClosed, "Connection closed." unless open?
       response = connection.send(type, *args)
-      raise response.error unless response.ok?
+      raise InvalidResponse, response.error unless response.ok?
       response
     end
     

@@ -31,10 +31,6 @@ module Net ; module DND
       @field.should_not be_read_all
     end
     
-    it "should throw an error on an invalid writable value" do
-      @write = "Q"
-      lambda { Field.new(@name, @write, @read) }.should raise_error(RuntimeError)
-    end
   end
   
   describe Field, "created using from_field_line with a proper line format" do
@@ -48,9 +44,9 @@ module Net ; module DND
   end
   
   describe Field, "created using from_field_line with an improper line format" do
-    it "should raise an error" do
+    it "should raise the proper error" do
       line = "This is a bad field line"
-      lambda { Field.from_field_line(line) }.should raise_error(RuntimeError)
+      lambda { Field.from_field_line(line) }.should raise_error(FieldLineInvalid)
     end
   end
   
