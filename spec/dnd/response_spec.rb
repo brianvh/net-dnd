@@ -3,7 +3,7 @@ require 'net/dnd/response'
 
 module Net ; module DND
 
-  describe "a good socket", :shared => true do
+  describe "an open socket", :shared => true do
     before(:each) do
       @socket = flexmock("TCP Socket")
       @response = Response.new(@socket)
@@ -34,7 +34,7 @@ module Net ; module DND
 
   describe Response, "after create status to a good socket" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     it "should have a :code of 220" do
       @response.code.should == 220
@@ -47,7 +47,7 @@ module Net ; module DND
 
   describe Response, "responding to a good :fields method" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     before(:each) do
       @code = 102
@@ -71,7 +71,7 @@ module Net ; module DND
 
   describe Response, "parsing :fields items from the socket" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     before(:each) do
       @code = [102, 200]
@@ -104,7 +104,7 @@ module Net ; module DND
 
   describe Response, "handling a bad :fields command" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     before(:each) do
       @code = 501
@@ -128,7 +128,7 @@ module Net ; module DND
 
   describe Response, "handling a good :lookup command" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     before(:each) do
       @code = 101
@@ -153,7 +153,7 @@ module Net ; module DND
 
   describe Response, "parsing :lookup items from the socket" do
 
-    it_should_behave_like "a good socket"
+    it_should_behave_like "an open socket"
 
     before(:each) do
       @code = [102, 201]

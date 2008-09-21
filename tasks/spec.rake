@@ -24,13 +24,13 @@ namespace :spec do
   if HAVE_RCOV
     desc 'Run all specs with RCov'
     Spec::Rake::SpecTask.new(:rcov) do |t|
-      t.ruby_opts = PROJ.ruby_opts
+      #t.ruby_opts = PROJ.ruby_opts
       t.spec_opts = PROJ.spec.opts
       t.spec_files = PROJ.spec.files
       t.libs += PROJ.libs
       t.rcov = true
       t.rcov_dir = PROJ.rcov.dir
-      t.rcov_opts = PROJ.rcov.opts + ['--exclude', 'spec']
+      t.rcov_opts = PROJ.rcov.opts + ['--exclude', 'spec/']
     end
 
     RCov::VerifyTask.new(:verify) do |t| 

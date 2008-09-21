@@ -7,7 +7,7 @@ load 'tasks/setup.rb'
 ensure_in_path 'lib'
 require 'net/dnd'
 
-task :default => 'spec:run'
+task :default => 'spec:specdoc'
 
 PROJ.name = 'net-dnd'
 PROJ.authors = 'Brian V. Hughes'

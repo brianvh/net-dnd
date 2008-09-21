@@ -9,15 +9,13 @@ module Net ; module DND
 
   class Connection
 
-    PORT = 902
-
     attr_reader :host, :socket, :error, :response
 
     def initialize(hostname)
       @host = hostname
       @open = false
       begin
-        @socket = Timeout::timeout(5) { TCPSocket.open(host, PORT) }
+        @socket = Timeout::timeout(5) { TCPSocket.open(host, 902) }
       rescue Timeout::Error
         @error = "Connection attempt to DND server on host #{host} has timed out."
         return

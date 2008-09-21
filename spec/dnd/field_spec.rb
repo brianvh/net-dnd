@@ -9,10 +9,6 @@ module Net ; module DND
       @field = Field.new(@name, @write, @read)
     end
     
-    it "should report back the proper name" do
-      @field.name.should == @name
-    end
-    
     it "should properly set the writeable flag" do
       @field.writeable.should == @write
     end
@@ -25,6 +21,18 @@ module Net ; module DND
       @field.should be_read_all
     end
     
+    it "should report back the proper name" do
+      @field.name.should == @name
+    end
+    
+    it "should return the name when coerced to a string" do
+      @field.to_s.should == @name
+    end
+    
+    it "should return :name when coerced to a symbol" do
+      @field.to_sym.should == @name.to_sym
+    end
+    
     it "should not report as readable by all if readable value is not 'A'" do
       @read = "T"
       @field = Field.new(@name, @write, @read)
@@ -34,11 +42,18 @@ module Net ; module DND
   end
   
   describe Field, "created using from_field_line with a proper line format" do
-    it "should parse into the proper values" do
+
+    before(:each) do
       @values = %w(nickname U A)
       line = @values.join(" ")
       @field = Field.from_field_line(line)
+    end
+
+    it "should have the correct name" do
       @field.name.should == @values[0]
+    end
+
+    it "should have to correct readable value" do
       @field.readable.should == @values[2]
     end
   end
