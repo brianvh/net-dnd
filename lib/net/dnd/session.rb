@@ -15,10 +15,15 @@ module Net ; module DND
     
     attr_reader :fields, :connection
     
-    def initialize(host, field_list=[])
+    def initialize(host)
       @connection = Connection.new(host)
       raise connection.error unless connection.open?
-      set_fields(field_list)
+    end
+
+    def self.start(host, field_list=[])
+      session = Session.new(host)
+      session.set_fields(field_list)
+      session
     end
     
     def open?
@@ -30,10 +35,10 @@ module Net ; module DND
       @fields = []
       response.items.each do |item|
         field = Field.from_field_line(item)
-        if field.red_all? # only world readable fields are valid for DND Profiles
+        if field.read_all? # only world readable fields are valid for DND Profiles
           @fields << field.to_sym
         else
-          raise "#{field.to_s} is not world readable." unless @fields.empty?
+          raise "#{field.to_s} is not world readable." unless field_list.empty?
         end
       end
     end
@@ -41,8 +46,8 @@ module Net ; module DND
     def find(look_for, one=nil)
       response = request(:lookup, look_for.to_s, fields)
       if one
-        return nil if response.items.empty? or response.items[1].is_a?(Array)
-        Profile.new(fields, response.items)
+        return nil unless response.items.length == 1
+        Profile.new(fields, response.items[0])
       else
         response.items.map { |item| Profile.new(fields, item) }
       end

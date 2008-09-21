@@ -27,7 +27,7 @@ module Net
   module DND
     
     def self.start(host, fields=[], &block)
-      session = Session.new(host, fields)
+      session = Session.start(host, fields)
       if block_given?
         yield session
         session.close
