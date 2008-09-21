@@ -13,22 +13,20 @@ module Net ; module DND
 
     attr_reader :host, :socket, :error, :response
 
-    attr_reader :command
-
     def initialize(hostname)
       @host = hostname
       @open = false
       begin
         @socket = Timeout::timeout(5) { TCPSocket.open(host, PORT) }
-      rescue Errno::ECONNREFUSED
-        @error = "Could not connect to DND server on host #{host}."
-        return
       rescue Timeout::Error
         @error = "Connection attempt to DND server on host #{host} has timed out."
         return
+      rescue Errno::ECONNREFUSED
+        @error = "Could not connect to DND server on host #{host}."
+        return
       end
       @response = Response.new(socket)
-      @open = true if @response.ok?
+      @open = @response.ok?
     end
 
     def open?
@@ -55,7 +53,6 @@ module Net ; module DND
     private
 
     def read_response(cmd="noop")
-      @command = cmd
       socket.puts(cmd)
       @response = Response.new(socket)
     end

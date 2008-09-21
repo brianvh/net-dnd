@@ -54,12 +54,12 @@ module Net ; module DND
     
     private
     
-      def request(type, *args)
-        raise "Connection closed." unless connection.open?
-        response = connection.send(type, *args)
-        raise response.error unless response.ok?
-        response
-      end
+    def request(type, *args)
+      raise "Connection closed." unless open?
+      response = connection.send(type, *args)
+      raise response.error unless response.ok?
+      response
+    end
     
   end
   
