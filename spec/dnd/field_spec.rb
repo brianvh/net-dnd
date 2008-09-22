@@ -25,6 +25,10 @@ module Net ; module DND
       @field.name.should == @name
     end
     
+    it "should report back the proper inspection string" do
+      @field.inspect.should match(/<Net::DND::Field name=".*" writeable="[AUNT]" readable="[AUNT]">/)
+    end
+    
     it "should return the name when coerced to a string" do
       @field.to_s.should == @name
     end

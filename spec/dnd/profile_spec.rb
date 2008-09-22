@@ -15,6 +15,10 @@ module Net ; module DND
       @profile.should be_instance_of(Profile)
     end
 
+    it "should return the correct inspection string" do
+      @profile.inspect.should match(/<Net::DND::Profile length=4, .*deptclass="Student".*>/)
+    end
+
     it "should have the correct number of entries" do
       @profile.length.should == 4
     end

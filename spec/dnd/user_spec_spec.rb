@@ -31,6 +31,10 @@ module Net ; module DND
     it "should return the specifier, with leading \"#\", when coerced to a string" do
       @spec.to_s.should == "##{@uid}"
     end
+
+    it "should return the correct inspection string" do
+      @spec.inspect.should match(/<Net::DND::UserSpec specifier="\d+" type=\:.+>/)
+    end
   end
     
   describe UserSpec, "- a standard DID specifier" do

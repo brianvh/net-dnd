@@ -53,7 +53,7 @@ module Net ; module DND
 
     before(:each) do
       @tcp.should_receive(:open).once.and_return(@socket)
-      @response.should_receive(:new).at_least.once.and_return(@response)
+      @response.should_receive(:process).at_least.once.and_return(@response)
       @response.should_receive(:ok?).at_least.once.and_return(true)
       @connection = Connection.new('my.goodhost.com')
     end
