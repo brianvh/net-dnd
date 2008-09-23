@@ -39,15 +39,6 @@ module Net ; module DND
     end
   end
 
-  describe "an open socket", :shared => true do
-    before(:each) do
-      @socket = flexmock("TCP Socket")
-      @response = Response.new(@socket)
-      @socket.should_receive(:gets).once.and_return('220 DND server ready.')
-      @response.status_line
-    end
-  end
-
   describe Response, "parsing a bad command" do
 
     before(:each) do
