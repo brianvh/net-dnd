@@ -16,7 +16,7 @@ module Net
 
     class ConnectionClosed < Net::DND::Error; end
 
-    class InvalidReponse < Net::DND::Error; end
+    class InvalidResponse < Net::DND::Error; end
 
   end
 end

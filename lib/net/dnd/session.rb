@@ -34,6 +34,7 @@ module Net
       def set_fields(field_list=[])
         response = request(:fields, field_list)
         @fields = []
+        raise FieldNotFound, response.error unless response.ok?
         response.items.each do |item|
           field = Field.from_field_line(item)
           if field.read_all? # only world readable fields are valid for DND Profiles
@@ -63,8 +64,6 @@ module Net
       def request(type, *args)
         raise ConnectionClosed, "Connection closed." unless open?
         response = connection.send(type, *args)
-        raise InvalidResponse, response.error unless response.ok?
-        response
       end
 
     end

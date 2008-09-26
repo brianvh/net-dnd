@@ -39,7 +39,6 @@ module Net ; module DND
       flexmock(Connection).should_receive(:new).once.and_return(@connection)
       @response = flexmock(Response)
       @connection.should_receive(:send).once.and_return(@response)
-      @response.should_receive(:ok?).once.and_return(true)
       @session = Session.new('my.goodhost.com')
       @session.close
     end
@@ -54,6 +53,11 @@ module Net ; module DND
       @connection = flexmock("Good Connection")
       @connection.should_receive(:open?).twice.and_return(true)
       flexmock(Connection).should_receive(:new).once.and_return(@connection)
+    end
+  end
+
+  describe "a good response", :shared => true do
+    before(:each) do
       @response = flexmock(Response)
       @connection.should_receive(:send).once.and_return(@response)
       @response.should_receive(:ok?).once.and_return(true)
@@ -61,9 +65,29 @@ module Net ; module DND
     end
   end
 
+  describe Session, "when setting fields with an unknown field" do
+
+    it_should_behave_like "a connected session"
+
+    before(:each) do
+      @response = flexmock(Response)
+      @connection.should_receive(:send).once.and_return(@response)
+      @response.should_receive(:ok?).once.and_return(false)
+      @response.should_receive(:error).once.and_return('unknown.')
+      @session = Session.new('my.goodhost.com')
+      @field_list = ['unknown']
+    end
+
+    it "should raise a Field Not Found error" do
+      lambda { @session.set_fields(@field_list) }.
+        should raise_error(FieldNotFound, "unknown.")
+    end
+  end
+
   describe Session, "when setting fields with a bad field_list" do
 
     it_should_behave_like "a connected session"
+    it_should_behave_like "a good response"
 
     before(:each) do
       @field_list = ['ssn']
@@ -75,7 +99,7 @@ module Net ; module DND
       flexmock(Field).should_receive(:from_field_line).once.and_return(@ssn_field)
     end
 
-    it "should raise a Field Access Denined error" do
+    it "should raise a Field Access Denied error" do
       lambda { @session.set_fields(@field_list) }.
         should raise_error(FieldAccessDenied, "#{@field_list[0]} is not world readable.")
     end
@@ -84,6 +108,7 @@ module Net ; module DND
   describe Session, "when setting fields with a good field_list" do
 
     it_should_behave_like "a connected session"
+    it_should_behave_like "a good response"
 
     before(:each) do
       name_field = flexmock("a name field")
@@ -112,7 +137,6 @@ module Net ; module DND
       nickname_field.should_receive(:to_sym).once.and_return(:nickname)
       flexmock(Field).should_receive(:from_field_line).twice.and_return(name_field, nickname_field)
       @fields_resp = flexmock(Response)
-      @fields_resp.should_receive(:ok?).once.and_return(true)
       @fields_resp.should_receive(:items).once.and_return(['name N A', 'nickname U A'])
       @connection = flexmock("A Started Connection")
       @connection.should_receive(:open?).times(3).and_return(true)

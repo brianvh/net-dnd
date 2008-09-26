@@ -34,7 +34,7 @@ module Net
       def status_line
         line = @socket.gets.chomp
         @code = line.match(/^(\d\d\d) /).captures[0].to_i
-        case @code
+        case code
           when /^2../ # Command successful, ready for next
             true
           when /^5../ # Command error, set the error value to the line text

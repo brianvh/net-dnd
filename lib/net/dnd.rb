@@ -1,5 +1,5 @@
-
-require "#{File.dirname(__FILE__)}/dnd/session"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../../lib"
+require "net/dnd/session"
 
 module Net
   
@@ -68,5 +68,4 @@ module Net
     end
     
   end
-  
 end

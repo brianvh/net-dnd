@@ -50,10 +50,11 @@ module Net
         read_response(cmd)
       end
 
-      def quit
+      def quit(noargs = nil)
         cmd = "quit"
         read_response(cmd)
         @socket.close
+        response
       end
 
       private
