@@ -20,8 +20,13 @@ def connect!(host, field_list)
   @dnd = Net::DND.start(host, field_list.split(/,/))
 end
 
+def connect_alum!(field_list='')
+  @dnd = Net::AlumniDND.start(field_list.split(/,/))
+end
+
 def find!(look_for, one=nil)
-  @profile = @dnd.find(look_for, one)
+  found = @dnd.find(look_for, one)
+  one ? @profile = found : @profiles = found
 end
 
 def close!

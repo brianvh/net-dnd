@@ -1,6 +1,6 @@
-Performing finds against a given DND host is the real purpose of the Net::DND library. Developers and
-users need the ability to start, and manage, Net::DND sessions and issue find commands that will return
-proper results.
+Performing finds against a given DND host, for single users, is a primary goal of
+the Net::DND library. Developers and users need the ability to start, and manage,
+Net::DND connections and issue single user finds that return proper results.
 
 Story: Finding a single DND user
   As a developer

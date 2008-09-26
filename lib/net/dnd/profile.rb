@@ -38,7 +38,7 @@ module Net
       def return_field(field)
         field = field.to_sym
         return @attributes[field] if @attributes.has_key?(field)
-        raise FieldNotFound, "Field #{field} does not found in this Profile"
+        raise FieldNotFound, "Field #{field} not found."
       end
 
     end
