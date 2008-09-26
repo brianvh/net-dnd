@@ -18,8 +18,15 @@ spec/dnd/profile_spec.rb
 spec/dnd/response_spec.rb
 spec/dnd/session_spec.rb
 spec/dnd/user_spec_spec.rb
-spec/spec.opts
 spec/spec_helper.rb
+stories/all.rb
+stories/helper.rb
+stories/multiple_find.rb
+stories/single_find.rb
+stories/steps/multiple_find_steps.rb
+stories/steps/single_find_steps.rb
+stories/stories/multiple_find.story
+stories/stories/single_find.story
 tasks/ann.rake
 tasks/bones.rake
 tasks/gem.rake
