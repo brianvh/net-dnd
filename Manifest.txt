@@ -2,7 +2,6 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/net-dnd
 lib/net/dnd.rb
 lib/net/dnd/connection.rb
 lib/net/dnd/errors.rb

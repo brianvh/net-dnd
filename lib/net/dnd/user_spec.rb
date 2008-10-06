@@ -10,9 +10,12 @@ module Net
     # matched against one of several patterns to determine it's type. This type is then used
     # to choose the output format of the specifier, when the instantiated class object is
     # coerced back to a string.
+
     class UserSpec
 
       attr_reader :type
+
+      # Construct our specifier object and set its type attribute.
 
       def initialize(specifier)
         @spec = specifier.to_s
@@ -28,6 +31,10 @@ module Net
           end
       end
 
+      # Output the correct 'string' format for our specifier. The :uid and :did types have
+      # special characters prepended to their value, so that they are correctly formatted
+      # for use in a DND connection/protocol lookup command.
+
       def to_s
         case @type
         when :uid
@@ -38,6 +45,8 @@ module Net
           @spec
         end
       end
+
+      # Inspection string for the specifier object.
 
       def inspect
         "#<#{self.class} specifier=\"#{@spec}\" type=:#{@type}>"

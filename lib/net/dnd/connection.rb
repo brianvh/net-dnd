@@ -19,6 +19,11 @@ module Net
 
       attr_reader :host, :socket, :error, :response
 
+      # Initialize the TCP connection to be used by the Session. Will raise errors if
+      # there's no response from port 902 on the supplied host, or if the connection
+      # attempt times out. This constructor also verifies that the connected DND server
+      # is ready to respond to protocol commands.
+
       def initialize(hostname)
         @host = hostname
         @open = false
@@ -35,20 +40,31 @@ module Net
         @open = @response.ok?
       end
 
+      # Is the TCP socket still open/active?
+
       def open?
         @open
       end
+
+      # Low-level protocol command for verifying a list of supplied fields. If no fields are
+      # supplied, the fields command will return verification data for all known fields.
 
       def fields(field_list=[])
         cmd = "fields #{field_list.join(' ')}".rstrip
         read_response(cmd)
       end
 
+      # Low-level protocol command for performing a 'find' operation. Takes a user specifier
+      # and a list of fields.
+
       def lookup(user, field_list)
         user_spec = UserSpec.new(user)
         cmd = "lookup #{user_spec.to_s},#{field_list.join(' ')}"
         read_response(cmd)
       end
+
+      # Low-level protocol command for telling the DND server that you are closing the connection.
+      # Calling this method on the socket also closes the session's TCP connection.
 
       def quit(noargs = nil)
         cmd = "quit"
@@ -58,6 +74,9 @@ module Net
       end
 
       private
+
+      # Private method for sending the protocol commands across the socket. Also handles the
+      # dispatching of any returned data to the Net::DND::Response class for processing.
 
       def read_response(cmd="noop")
         socket.puts(cmd)
