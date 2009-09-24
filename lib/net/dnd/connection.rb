@@ -80,6 +80,7 @@ module Net
 
       def read_response(cmd="noop")
         socket.puts(cmd)
+        @open = !socket.closed?
         @response = Response.process(socket)
       end
 

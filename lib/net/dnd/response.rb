@@ -35,7 +35,7 @@ module Net
       # Was the result of the last command a 'good' respose?
 
       def ok?
-        /^2../ === code.to_s
+        (200..299) === code
       end
 
       # The first line returned from all command sent to a DND server is the Status Line. The
@@ -51,9 +51,9 @@ module Net
         line = @socket.gets.chomp
         @code = line.match(/^(\d\d\d) /).captures[0].to_i
         case code
-          when /^2../ # Command successful, ready for next
+          when 200..299 # Command successful, ready for next
             true
-          when /^5../ # Command error, set the error value to the line text
+          when 500..599 # Command error, set the error value to the line text
             @error = line.match(/^\d\d\d (.*)/).captures[0]
           when 101, 102 # Data command status, set the count and sub_count values
             counts = line.match(/^\d\d\d (\d+) *(\d*)/).captures
