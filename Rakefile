@@ -6,10 +6,12 @@ load 'tasks/setup.rb'
 
 ensure_in_path 'lib'
 require 'net/dnd'
+require 'net/dnd/version'
 
 task :default => 'spec:specdoc'
 
 PROJ.name = 'net-dnd'
+PROJ.version = Net::DND::VERSION
 PROJ.authors = 'Brian V. Hughes'
 PROJ.email = 'brianvh@dartmouth.edu'
 PROJ.url = 'http://dev.dartmouth.edu/projects/'
