@@ -1,8 +1,10 @@
-folder_path = File.dirname(__FILE__)
-require "#{folder_path}/errors"
+$:.unshift(File.dirname(__FILE__)) unless $:.include?(File.dirname(__FILE__))
+require 'errors'
 
 module Net
   module DND
+
+    autoload :Expires, 'expires'
 
     # Container class for a single DND Profile. Takes the current fields set in the Session, along with
     # the returned items from a lookup command and builds a 'profile' Hash. The class then provides
@@ -15,6 +17,10 @@ module Net
 
       def initialize(fields, items)
         @profile = Hash[*fields.zip(items).flatten]
+
+        if @profile.has_key?(:expires)
+          self.extend Net::DND::Expires
+        end
       end
 
       # Inspection string for instances of the class

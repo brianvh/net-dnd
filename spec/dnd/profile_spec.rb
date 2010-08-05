@@ -45,4 +45,22 @@ module Net ; module DND
 
   end
 
+  describe Profile, "for Joe D. Expired" do
+
+    before(:each) do
+      @fields = [:name, :expires]
+      @items = ['Joe D. User', '01-Jan-2010']
+      @profile = Profile.new(@fields, @items)
+    end
+
+    it "should have a valid expire_date" do
+      @profile.expires_on.should_not be_nil
+    end
+
+    it "should be expired" do
+      @profile.should be_expired
+    end
+
+  end
+
 end ; end
