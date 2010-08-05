@@ -2,9 +2,11 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
+bin/net-dnd
 lib/net/dnd.rb
 lib/net/dnd/connection.rb
 lib/net/dnd/errors.rb
+lib/net/dnd/expires.rb
 lib/net/dnd/field.rb
 lib/net/dnd/profile.rb
 lib/net/dnd/response.rb
