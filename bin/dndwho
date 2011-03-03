@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'net/dnd/cli'
+Net::DND::CLI.start
