@@ -4,7 +4,7 @@ require "net/dnd/version"
 
 Gem::Specification.new do |s|
   s.name        = "net-dnd"
-  s.version     = Net::Dnd::VERSION
+  s.version     = Net::DND::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Brian V. Hughes"]
   s.email       = ["brianvh@dartmouth.edu"]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'thor', '~> 0.14.6'
 
   s.add_development_dependency 'bundler', '~> 1.0.10'
-  s.add_development_dependency 'rspec', '~> 2.5.0'
+  s.add_development_dependency 'rspec', '~> 2.3.0'
+  s.add_development_dependency 'capybara', '~> 0.4.1'
   s.add_development_dependency 'aruba', '~> 0.3.2'
 end
