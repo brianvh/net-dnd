@@ -1,19 +1,4 @@
-Net::DND
-  by Brian V. Hughes
-     Dartmouth College
-     http://dev.dartmouth.edu/projects/
-
-== DESCRIPTION:
-
-Net::DND is a Ruby library (gem) for performing user finding (aka. lookup) operations
-on a Dartmouth Name Directory (DND) server. This library contains a familiar block
-construct for starting and interacting with a DND session/connection. Within the block
-you can submit various find commands and get back zero, one or more 'hits', in the form
-of a DND Profile object. Please see the code comments and tests/specs for more information.
-
-== LICENSE:
-
-Copyright (c) 2008 by the Trustees of Dartmouth College. All rights reserved.
+Copyright (c) 2011 by the Trustees of Dartmouth College. All rights reserved.
 
 The net-dnd Ruby library, and accompanying documentation, are provided
 subject to the following license agreement. By obtaining and/or using the
