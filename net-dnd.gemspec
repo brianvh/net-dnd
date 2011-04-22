@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Brian V. Hughes"]
   s.email       = ["brianvh@dartmouth.edu"]
-  s.homepage    = ""
+  s.homepage    = %(https://github.com/brianvh/net-dnd/)
   s.summary     = %(#{s.name}-#{s.version})
-  s.description = %(Ruby library for DND lookups. Includes a dndwho command-line binary.)
+  s.description = %(Ruby library for DND lookups.)
 
   s.required_rubygems_version = ">= 1.3.7"
   s.rubyforge_project = "net-dnd"
@@ -20,10 +20,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'thor', '~> 0.14.6'
-
   s.add_development_dependency 'bundler', '~> 1.0.10'
-  s.add_development_dependency 'rspec', '~> 2.3.0'
-  s.add_development_dependency 'capybara', '~> 0.4.1'
-  s.add_development_dependency 'aruba', '~> 0.3.2'
+  s.add_development_dependency 'rspec', '~> 2.5.0'
 end
